@@ -1,11 +1,24 @@
 function simulateBackendAuth(email, password) {
     return new Promise(resolve => {
         setTimeout(() => {
-            if (email === '111@gmail.com') {
+            const registeredUsers = JSON.parse(localStorage.getItem('registeredUsers') || '[]');
+            
+            const user = registeredUsers.find(u => u.email === email);
+            
+            if (!user) {
                 resolve({ 
                     success: false, 
                     message: '找不到此帳號，請確認您的電子郵件或先進行註冊。',
                     errorCode: 'USER_NOT_FOUND' 
+                });
+                return;
+            }
+            
+            if (user.password !== password) {
+                 resolve({ 
+                    success: false, 
+                    message: '密碼錯誤，請重新輸入。',
+                    errorCode: 'WRONG_PASSWORD' 
                 });
                 return;
             }
