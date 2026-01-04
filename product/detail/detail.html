@@ -5,10 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title id="page-title">商品詳細頁面 - [商品名稱]</title> 
     <link rel="stylesheet" href="detailstyle.css">
-    <link rel="stylesheet" href="../allstyle.css">
-
+    <link rel="stylesheet" href="../allstyle.css"> 
     <script src="detaildata.js"></script>
-</head>
+    
+    </head>
 <body>
     <header>
         <section class="size">
@@ -51,6 +51,13 @@
 
             <h1 class="product-title" id="product-title">商品一 (範例標題)</h1>
 
+            <div class="review-header">
+                <div id="average-rating-display" style="display: none;">
+                    <span id="product-rating-stars" class="rating-stars"></span>
+                    <span id="product-rating-value" style="font-weight: bold; margin-left: 10px;"></span>
+                    <span id="product-review-count" style="color: #666; margin-left: 5px;"></span>
+                </div>
+            </div>
             <p class="product-price">售價: <span>$</span><span id="product-price-value"></span></p>
 
             <div class="purchase-options">
@@ -67,7 +74,12 @@
             </div>
         </div>
     </div>
-
+    
+    <section class="review-section">
+        <h2>商品評論</h2>
+        <div id="product-reviews-list">
+            </div>
+    </section>
     <footer class="main-footer">
             <div class="footer-content-wrapper">
                 <div class="footer-column">
@@ -104,5 +116,6 @@
         </footer>
 
     <script src="detail.js"></script>
+    <script src="../login/header-status.js"></script>
 </body>
 </html>
