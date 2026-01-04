@@ -711,27 +711,24 @@ h1, h2, h3, h4, p, ul, ol, li {
         padding: 10px 20px;
         justify-content: flex-start; 
     }
-    
-    /* 修正搜尋表單：確保內部元素 flex 排列，佔滿整行 */
     .top-nav > form {
         width: 100%;
         margin: 10px 0; 
-        display: flex; /* <-- ADDED: 確保內部元件能夠並排 */
-        gap: 10px; /* <-- ADDED: 增加間距 */
+        display: flex;
+        gap: 10px;
     }
     .search-input {
         flex-grow: 1; 
     }
     .search-button {
-        /* 保持原有樣式，但確保其不會被過度壓縮 */
         min-width: 70px; 
     }
     
-    /* 修正三個導航按鈕的寬度：使用 30% 避免 33.33% 跑版 */
+    
     .category-link,
     .member-link,
     .shopping-cart-link {
-        width: 30%; /* <-- MODIFIED: 使用更安全的 30% 寬度 */
+        width: 30%; 
         margin: 5px; 
         font-size: 0.9em;
         line-height: 30px;
@@ -740,7 +737,7 @@ h1, h2, h3, h4, p, ul, ol, li {
     }
     .category-dropdown {
         margin-left: 5px; 
-        width: 30%; /* <-- MODIFIED: 與按鈕保持一致 */
+        width: 30%;
         flex-grow: 0;
     }
     
@@ -787,16 +784,14 @@ h1, h2, h3, h4, p, ul, ol, li {
     .search-button {
         min-width: 60px;
     }
-
-    /* 修正三個導航按鈕的寬度：在 480px 以下全部佔滿，垂直堆疊 */
     .category-link,
     .member-link,
     .shopping-cart-link {
-        width: 100%; /* <-- MODIFIED: 確保垂直堆疊 */
+        width: 100%;
         margin: 5px 0;
     }
     .category-dropdown {
-        width: 100%; /* <-- MODIFIED: 確保垂直堆疊 */
+        width: 100%; 
         margin: 5px 0;
     }
      .dropdown-content {
