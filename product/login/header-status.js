@@ -6,7 +6,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
     memberLinks.forEach(link => {
         if (isUserLoggedIn) {
-            link.textContent = `${userName || '會員'}中心`;
+            
+            link.textContent = '會員中心'; 
             
             let targetPath = 'product/login/member.html';
 

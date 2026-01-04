@@ -22,12 +22,11 @@ function simulateBackendAuth(email, password) {
                 });
                 return;
             }
-
-            const atIndex = email.indexOf('@');
-            const defaultName = atIndex !== -1 ? email.substring(0, atIndex) : '用戶';
+            
+            const userNameForDisplay = user.username || '用戶'; 
             
             const simulatedUser = {
-                name: defaultName, 
+                name: userNameForDisplay, 
                 email: email
             };
 
@@ -43,36 +42,39 @@ function simulateBackendAuth(email, password) {
 
 function authenticateUser(data, formElement) {
     const errorMessage = document.getElementById('error-message');
+    errorMessage.textContent = '登入中...';
+    errorMessage.style.display = 'block';
 
     simulateBackendAuth(data.email, data.password)
-    .then(result => {
-        if (result.success) {
-            alert('登入成功！歡迎回來。');
-            formElement.reset(); 
-            localStorage.setItem('userToken', result.token); 
-            localStorage.setItem('userName', result.user.name); 
-            localStorage.setItem('userEmail', result.user.email); 
-
-            setTimeout(() => {
-                window.location.href = 'member.html'; 
-            }, 100); 
-        } else {
-            if (result.errorCode === 'USER_NOT_FOUND') {
-                alert('您輸入的電子郵件未註冊！即將為您導向註冊頁面。');
-                window.location.href = 'register.html'; 
-                return;
+        .then(result => {
+            if (result.success) {
+                handleSuccessfulLogin(result.user, formElement);
+            } else {
+                errorMessage.textContent = result.message;
+                errorMessage.style.display = 'block';
             }
-
-            errorMessage.textContent = result.message || '登入失敗，請檢查帳號和密碼。';
+        })
+        .catch(error => {
+            errorMessage.textContent = '登入發生錯誤，請稍後再試。';
             errorMessage.style.display = 'block';
-        }
-    })
-    .catch(error => {
-        console.error('登入處理錯誤:', error);
-        errorMessage.textContent = '連線伺服器或處理請求失敗，請稍後再試。';
-        errorMessage.style.display = 'block';
-    });
+            console.error('Login error:', error);
+        });
 }
+
+function handleSuccessfulLogin(user, formElement) {
+    localStorage.setItem('userToken', user.token); 
+    localStorage.setItem('userName', user.name); 
+    localStorage.setItem('isLoggedIn', 'true');
+
+    formElement.reset(); 
+
+    alert(`歡迎回來，${user.name}！您已成功登入。`);
+
+    setTimeout(() => {
+        window.location.href = '../../index.html'; 
+    }, 100); 
+}
+
 
 document.addEventListener('DOMContentLoaded', () => {
     const successMessage = localStorage.getItem('registrationSuccess');
@@ -117,7 +119,8 @@ document.addEventListener('DOMContentLoaded', () => {
         const userEmail = prompt('請輸入您的註冊電子郵件地址：');
         
         if (userEmail) {
-            alert(`已向 ${userEmail} 發送密碼重設郵件，請檢查您的信箱。`);
+            alert(`已向 ${userEmail} 發送密碼重設連結，請檢查您的電子郵件。`);
         }
     });
+
 });
