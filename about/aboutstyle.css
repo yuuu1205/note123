@@ -1,0 +1,149 @@
+.about-page-title {
+    text-align: center; 
+    font-size: 2.5em; 
+    color: #3f5b7a; 
+    padding-top: 40px;
+    margin-bottom: 20px;
+}
+
+.brand-identity-container {
+    max-width: 800px;
+    margin: 40px auto; 
+    padding: 30px;
+    background-color: #ffffff; 
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+    display: flex; 
+    align-items: flex-start; 
+    gap: 30px; 
+}
+
+.brand-logo-large {
+    width: 120px; 
+    height: auto;
+    border-radius: 0; 
+    flex-shrink: 0; 
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); 
+    padding: 10px;
+    background-color: #f7f7f7;
+}
+
+.brand-text {
+    flex-grow: 1; 
+}
+
+.brand-text p {
+    font-size: 1.05em;
+    line-height: 1.7;
+    color: #555;
+    margin-bottom: 10px;
+    text-align: left;
+}
+
+.brand-text h3 {
+    margin-top: 0;
+    color: #3f5b7a;
+}
+
+.website-intro-container {
+    max-width: 800px;
+    margin: 40px auto; 
+    padding: 30px;
+    background-color: #ffffff; 
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    text-align: left; 
+}
+
+.intro-title {
+    color: #a6ba82; 
+    font-size: 1.8em;
+    margin-bottom: 20px;
+    border-bottom: 2px solid #e0e0e0;
+    padding-bottom: 10px;
+    text-align: center;
+}
+
+.intro-content p {
+    font-size: 1.1em;
+    line-height: 1.7;
+    color: #444;
+    margin-bottom: 15px;
+}
+
+.website-intro-container ol {
+    margin: 15px 0 0 20px;
+    padding-left: 20px;
+    line-height: 1.7;
+    font-size: 1.1em;
+    color: #444;
+}
+
+.product-category-list {
+    list-style: none; 
+    padding: 0;
+    margin: 20px auto;
+    max-width: 750px;
+}
+
+.product-category-list li {
+    background-color: #f0f3f6; 
+    padding: 15px;
+    margin-bottom: 15px;
+    border-left: 5px solid #a6ba82;
+}
+
+.product-category-list h4 {
+    color: #3f5b7a; 
+    font-size: 1.25em;
+    margin-top: 0;
+    margin-bottom: 8px;
+    font-weight: bold;
+}
+
+.team-intro-title {
+    margin-top: 50px !important; 
+}
+
+.team-members-container {
+    display: flex; 
+    flex-wrap: wrap; 
+    justify-content: center; 
+    gap: 30px; 
+    max-width: 600px; 
+    margin: 30px auto;
+    padding: 20px;
+}
+
+.member-card {
+    background-color: #ffffff;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+    padding: 15px;
+    width: 240px; 
+    text-align: center;
+    transition: transform 0.3s ease;
+}
+
+.member-card:hover {
+    transform: translateY(-5px); 
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+}
+
+.member-photo {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%; 
+    object-fit: cover;
+    margin-bottom: 15px;
+    border: 3px solid #a6ba82;
+}
+
+.member-name {
+    text-align: center; 
+    font-size: 1.4em;
+    color: #3f5b7a;
+    margin-bottom: 0; 
+}
