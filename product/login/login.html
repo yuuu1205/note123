@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>知行筆記 - 會員登入</title>
+    <link rel="stylesheet" href="loginstyle.css">
+    <link rel="stylesheet" href="../allstyle.css"> 
+</head>
+<body>
+
+    <header>
+        <section class="size">
+            <div class="logo">
+                <a href="../../index.html" class="logo-link">知行筆記</a>
+            </div>
+        </section>
+        
+        <nav class="top-nav">
+            <form action="../search/search-results.html" method="GET"> 
+                <input type="text" name="q" placeholder="請輸入想搜尋的產品" class="search-input">
+                <button type="submit" class="search-button">開始搜尋</button>
+            </form>
+            
+            <div class="category-dropdown">
+                
+                <input type="checkbox" id="category-toggle" class="category-toggle" hidden>
+                
+                <label for="category-toggle" class="category-link">商品類別</label>
+                
+                <ul class="dropdown-content">
+                  <li><a href="../category/category.html?type=pen">🖋️ 精準書寫</a></li> 
+                  <li><a href="../category/category.html?type=book">📓 筆記介面</a></li> 
+                  <li><a href="../category/category.html?type=desk">💻 桌面環境</a></li> 
+              </ul>
+            </div>
+            
+            <a href="../login/login.html" class="member-link">會員登入</a>
+            <a href="../cart/cart.html" class="shopping-cart-link">購物車</a>
+        </nav>
+    </header>
+
+    <div class="login-container">
+        <h2>會員中心</h2>
+        
+        <div id="status-display" style="display: none; text-align: center;">
+            <p id="welcome-message" style="font-size: 1.2em; font-weight: bold; margin-bottom: 20px;"></p>
+            
+            <p id="user-info-display" style="margin-bottom: 30px; line-height: 1.8; color: #555;"></p>
+            
+            <div class="member-menu-links">
+                <a href="#" id="change-password-link" class="menu-link">修改密碼</a>
+                <a href="#" id="order-history-link" class="menu-link">購物紀錄</a>
+            </div>
+            
+            <button id="logout-button" class="action-button">登出</button>
+        </div>
+        
+        <div id="change-password-section" style="display: none;">
+            <h3>修改您的密碼</h3>
+            <form id="changePasswordForm">
+                <div class="input-group">
+                    <label for="old-password">舊密碼</label>
+                    <input type="password" id="old-password" required>
+                </div>
+                <div class="input-group">
+                    <label for="new-password">新密碼</label>
+                    <input type="password" id="new-password" required>
+                </div>
+                <div class="input-group">
+                    <label for="confirm-new-password">確認新密碼</label>
+                    <input type="password" id="confirm-new-password" required>
+                </div>
+                <p id="password-error-message" class="error-text"></p>
+                <button type="submit" class="action-button">確認修改</button>
+            </form>
+            <button id="back-to-status-1" class="secondary-button" style="margin-top: 15px;">返回會員中心</button>
+        </div>
+
+        <div id="order-history-section" style="display: none;">
+            <h3>您的購物紀錄</h3>
+            <div id="order-list">
+                </div>
+            <p id="order-history-message" style="margin-top: 20px; color: #555;"></p>
+            <button id="back-to-status-2" class="secondary-button">返回會員中心</button>
+        </div>
+        
+        <form id="loginForm">
+            <div class="input-group">
+                <label for="email">電子郵件或帳號</label>
+                <input type="text" id="email" name="email" required>
+            </div>
+
+            <div class="input-group">
+                <label for="password">密碼</label>
+                <input type="password" id="password" name="password" required>
+            </div>
+
+            <p id="error-message" class="error-text"></p>
+
+            <button type="submit" id="login-button">登入</button>
+
+            <div class="links">
+                <a href="#" id="forgot-password-link">忘記密碼？</a>
+                <a href="register.html">註冊新帳號</a>
+            </div>
+        </form>
+    </div>
+
+    <footer class="main-footer">
+        <div class="footer-content-wrapper">
+            <div class="footer-column">
+                <h4>聯絡我們</h4>
+                <ul>
+                  <li>客服信箱: <a href="mailto:note123@gmail.com">note123@gmail.com</a></li>
+                  <li>服務時間: Mon-Fri 09:00 - 18:00</li>
+                  <li><a href="../../faq/faq.html">常見問題 (FAQ)</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h4>商品分類</h4>
+                <ul>
+                    <li><a href="../product/category/category.html?type=pen">精準書寫</a></li>
+                    <li><a href="../category/category.html?type=book">筆記介面</a></li>
+                    <li><a href="../category/category.html?type=desk">桌面環境</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h4>會員服務</h4>
+                <ul>
+                    <li><a href="../login/login.html">會員登入</a></li>
+                    <li><a href="../cart/cart.html">購物車</a></li>
+                    <li><a href="../../about/about.html">關於我們</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="main-footer">
+            <a href="../../index.html" class="footer-home-link">返回首頁</a>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2025 知行筆記 版權所有.</p>
+        </div>
+    </footer>
+
+    <script src="login.js"></script>
+</body>
+</html>
