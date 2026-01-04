@@ -1,8 +1,20 @@
 function simulateBackendAuth(email, password) {
     return new Promise(resolve => {
         setTimeout(() => {
+            if (email === '111@gmail.com') {
+                resolve({ 
+                    success: false, 
+                    message: '找不到此帳號，請確認您的電子郵件或先進行註冊。',
+                    errorCode: 'USER_NOT_FOUND' 
+                });
+                return;
+            }
+
+            const atIndex = email.indexOf('@');
+            const defaultName = atIndex !== -1 ? email.substring(0, atIndex) : '用戶';
+            
             const simulatedUser = {
-                name: '用戶', 
+                name: defaultName, 
                 email: email
             };
 
@@ -32,6 +44,12 @@ function authenticateUser(data, formElement) {
                 window.location.href = 'member.html'; 
             }, 100); 
         } else {
+            if (result.errorCode === 'USER_NOT_FOUND') {
+                alert('您輸入的電子郵件未註冊！即將為您導向註冊頁面。');
+                window.location.href = 'register.html'; 
+                return;
+            }
+
             errorMessage.textContent = result.message || '登入失敗，請檢查帳號和密碼。';
             errorMessage.style.display = 'block';
         }
