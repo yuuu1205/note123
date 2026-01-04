@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>知行筆記 - 首頁</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <header>
+      <section class="size">
+            <a href="index.html" class="logo-link">知行筆記</a>
+      </section>
+      
+      <section>
+        <nav class="top-nav">
+
+          <form action="product/search/search-results.html" method="GET"> 
+            <input type="text" name="q" placeholder="請輸入想搜尋的產品" class="search-input">
+            <button type="submit" class="search-button">開始搜尋</button>
+          </form>
+            
+            <div class="category-dropdown">
+                
+                <input type="checkbox" id="category-toggle" class="category-toggle" hidden>
+                
+                <label for="category-toggle" class="category-link">商品類別</label>
+                
+                <ul class="dropdown-content">
+                  <li><a href="product/category/category.html?type=pen">🖋️ 精準書寫</a></li> 
+                  <li><a href="product/category/category.html?type=book">📓 筆記介面</a></li> 
+                  <li><a href="product/category/category.html?type=desk">💻 桌面環境</a></li> 
+              </ul>
+            </div>
+            <a href="product/login/login.html" class="member-link">會員登入</a>
+
+            <a href="product/cart/cart.html" class="shopping-cart-link">購物車</a>
+
+        </nav>
+    </header>
+
+    <main>
+      <div class="slideshow-container">
+          
+          <div class="carousel-content-wrapper">
+              <div class="carousel-item active">
+                  <img src="image/photo1.jpg" alt="photo1">
+              </div>
+      
+              <div class="carousel-item">
+                  <img src="image/photo2.jpg" alt="photo2">
+              </div>
+      
+              <div class="carousel-item">
+                  <img src="image/photo3.jpg" alt="photo3">
+              </div>
+      
+              <div class="carousel-item">
+                  <img src="image/photo4.jpg" alt="photo4">
+              </div>
+              </div>
+          <a class="prev-btn" onclick="plusSlides(-1)">&#10094;</a>
+          <a class="next-btn" onclick="plusSlides(1)">&#10095;</a>
+  
+          <div class="indicator-bar">
+              <span class="indicator active" onclick="currentSlide(0)"></span>
+              <span class="indicator" onclick="currentSlide(1)"></span>
+              <span class="indicator" onclick="currentSlide(2)"></span>
+              <span class="indicator" onclick="currentSlide(3)"></span>
+              </div>
+        </div>
+      <script src="slideshow.js"></script>
+
+      <section class="promoted-sections-container">
+        
+        <h2 class="activity-title">✨ 精選推薦</h2>
+        
+        <div class="featured-block hot-selling">
+            <h3>🔥 本週熱賣商品</h3>
+            <p class="section-description">精選熱銷品，筆記愛好者的最愛。</p>
+            
+            <div class="product-card-container">
+                <div class="product-card">
+                    <img src="product/image/photo1.jpg" alt="速乾水性筆">
+                    <h4>速乾水性筆</h4>
+                    <p>瞬寫速乾墨水，專為左撇子設計，書寫後即刻乾燥。</p>
+                    <a href="product/detail/detail.html?id=1" class="buy-link">點擊購買</a>
+                </div>
+                
+                <div class="product-card">
+                    <img src="product/image/photo2.jpg" alt="自動鉛筆">
+                    <h4>自動鉛筆</h4>
+                    <p>專業級重心設計，全金屬握位，提供絕佳的穩定性和操控手感。</p>
+                    <a href="product/detail/detail.html?id=2" class="buy-link">點擊購買</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="featured-block featured-recommend">
+            <h3>🛒 商城獨家推薦</h3>
+            <p class="section-description">為您打造的高效桌面環境組件。</p>
+
+            <div class="product-card-container">
+                <div class="product-card">
+                    <img src="product/image/photo22.jpg" alt="LED檯燈">
+                    <h4>LED檯燈</h4>
+                    <p>專業護眼光源，高演色性 LED 燈條，減少長時間閱讀對眼睛的負擔。</p>
+                    <a href="product/detail/detail.html?id=22" class="buy-link">點擊購買</a>
+                </div>
+                
+                <div class="product-card">
+                    <img src="product/image/photo10.jpg" alt="筆記本">
+                    <h4>筆記本</h4>
+                    <p>鋼筆適用特製紙，80 磅厚紙張，抗墨水滲透性極佳。</p>
+                    <a href="product/detail/detail.html?id=10" class="buy-link">點擊購買</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="testimonials-section">
+      <h2>🌟 顧客真誠推薦</h2>
+      <p class="section-description">我們致力於提供您最好的體驗，以下是來自顧客最真實的回饋：</p> 
+  
+      <div class="testimonial-card-container">
+          <div class="testimonial-card">
+              <p class="quote">"速乾水性筆真的解決了我左手書寫常弄髒頁面的困擾，寫完馬上乾，效率大大提升！"</p>
+              <p class="customer-info">— 專業人士 / 陳小姐</p>
+          </div>
+          
+          <div class="testimonial-card">
+              <p class="quote">"商城獨家推薦的 LED 檯燈，光線柔和又舒服，長時間閱讀或工作，眼睛負擔真的減輕很多。"</p>
+              <p class="customer-info">— 學生族群 / 王同學</p>
+          </div>
+
+           <div class="testimonial-card">
+              <p class="quote">"知行筆記的筆記本紙質抗滲墨性極佳，鋼筆愛用者絕對要試試看！" </p>
+              <p class="customer-info">— 筆具收藏家 / 林先生</p>
+          </div>
+      </div>
+  </section>
+
+    <section class="about-us-section">
+        <h2>關於我們：知行筆記</h2>
+        <div class="about-content">
+            <p>知行筆記的創立，源自於對「高效生活與深度思考」的追求。我們相信，工欲善其事，必先利其器。</p>
+            <p>在這裡，您能找到的不僅僅是文具，更是幫助您提升生產力、整理思緒、實現知識與行動同步的工具。</p>
+            </div>
+
+            <div class="about-us-footer">
+              <a href="about/about.html" class="view-more-btn">查看更多</a>
+          </div>
+    </section>
+   
+    </main>
+
+    <footer class="main-footer">
+        <div class="footer-content-wrapper">
+            <div class="footer-column">
+                <h4>聯絡我們</h4>
+                <ul>
+                  <li>客服信箱: <a href="mailto:note123@gmail.com">note123@gmail.com</a></li>
+                  <li>服務時間: Mon-Fri 09:00 - 18:00</li>
+                  <li><a href="faq/faq.html">常見問題 (FAQ)</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h4>商品分類</h4>
+                <ul>
+                    <li><a href="product/category/category.html?type=pen">精準書寫</a></li>
+                    <li><a href="product/category/category.html?type=book">筆記介面</a></li>
+                    <li><a href="product/category/category.html?type=desk">桌面環境</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h4>會員服務</h4>
+                <ul>
+                    <li><a href="product/login/login.html">會員登入</a></li>
+                    <li><a href="product/cart/cart.html">購物車</a></li>
+                    <li><a href="about/about.html">關於我們</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2025 知行筆記 版權所有.</p>
+        </div>
+    </footer>
+    </body>
+</html>
