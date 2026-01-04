@@ -7,6 +7,10 @@ document.addEventListener('DOMContentLoaded', () => {
     const errorMessage = document.getElementById('error-message');
 
     errorMessage.style.display = 'none';
+    function isValidEmail(email) {
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        return emailRegex.test(email);
+    }
 
     registerForm.addEventListener('submit', function(event) {
         event.preventDefault(); 
@@ -24,7 +28,13 @@ document.addEventListener('DOMContentLoaded', () => {
             errorMessage.style.display = 'block';
             return;
         }
-        
+
+        if (!isValidEmail(email)) {
+            errorMessage.textContent = '電子郵件格式不正確。';
+            errorMessage.style.display = 'block';
+            return;
+        }
+
         if (password !== confirmPassword) {
             errorMessage.textContent = '兩次輸入的密碼不一致。';
             errorMessage.style.display = 'block';
@@ -37,14 +47,22 @@ document.addEventListener('DOMContentLoaded', () => {
             password: password
         };
 
-        registerNewUser(registrationData, registerForm);
+        const registerButton = document.getElementById('register-button');
+        registerButton.disabled = true;
+        registerButton.textContent = '註冊中...';
+
+        registerNewUser(registrationData, registerForm)
+        .finally(() => {
+            registerButton.disabled = false;
+            registerButton.textContent = '立即註冊';
+        });
     });
 });
 
 function registerNewUser(data, formElement) {
     const errorMessage = document.getElementById('error-message');
 
-    simulateRegistrationBackend(data)
+    return simulateRegistrationBackend(data)
     .then(result => {
         if (result.success) {
             alert('註冊成功！您現在可以登入了。');
