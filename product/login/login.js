@@ -1,4 +1,4 @@
-function simulateBackendAuth(email, password) {
+function simulateBackendAuth(email, password, isFirstAttempt) {
     return new Promise(resolve => {
         setTimeout(() => {
             const simulatedUser = {
@@ -6,34 +6,63 @@ function simulateBackendAuth(email, password) {
                 email: email
             };
 
-            resolve({ 
-                success: true, 
-                token: 'fake-test-token-' + Date.now(), 
-                message: '登入成功',
-                user: simulatedUser 
-            });
+            const registeredUser = JSON.parse(sessionStorage.getItem('registeredUser'));
+            
+            if (isFirstAttempt && !registeredUser) {
+                resolve({ 
+                    success: false, 
+                    message: '查無此帳號！請先前往註冊新帳號。',
+                    errorCode: 'NOT_REGISTERED' 
+                });
+            } else {
+                resolve({ 
+                    success: true, 
+                    token: 'fake-test-token-' + Date.now(), 
+                    message: '登入成功',
+                    user: registeredUser || simulatedUser 
+                });
+            }
         }, 500); 
     });
 }
 
 function authenticateUser(data, formElement) {
     const errorMessage = document.getElementById('error-message');
+    const isFirstAttempt = !sessionStorage.getItem('loginAttempt');
 
-    simulateBackendAuth(data.email, data.password)
+    sessionStorage.setItem('loginAttempt', 'true');
+
+    simulateBackendAuth(data.email, data.password, isFirstAttempt)
     .then(result => {
         if (result.success) {
             alert('登入成功！歡迎回來。');
             formElement.reset(); 
+            
+            const userToStore = result.user;
             localStorage.setItem('userToken', result.token); 
-            localStorage.setItem('userName', result.user.name); 
-            localStorage.setItem('userEmail', result.user.email); 
+            localStorage.setItem('userName', userToStore.username || userToStore.name);
+            localStorage.setItem('userEmail', userToStore.email); 
+
+            sessionStorage.removeItem('loginAttempt');
+            sessionStorage.removeItem('registeredUser');
+            localStorage.removeItem('registrationSuccess'); 
 
             setTimeout(() => {
                 window.location.href = 'member.html'; 
             }, 100); 
+            
         } else {
             errorMessage.textContent = result.message || '登入失敗，請檢查帳號和密碼。';
             errorMessage.style.display = 'block';
+
+            if (result.errorCode === 'NOT_REGISTERED') {
+                setTimeout(() => {
+                    alert(result.message);
+                    sessionStorage.setItem('prefillEmail', data.email);
+                    sessionStorage.setItem('prefillPassword', data.password); 
+                    window.location.href = 'register.html'; 
+                }, 100);
+            }
         }
     })
     .catch(error => {
@@ -44,19 +73,39 @@ function authenticateUser(data, formElement) {
 }
 
 document.addEventListener('DOMContentLoaded', () => {
-    const successMessage = localStorage.getItem('registrationSuccess');
-    if (successMessage) {
-        alert(successMessage);
-        localStorage.removeItem('registrationSuccess'); 
-    }
-
     const loginForm = document.getElementById('loginForm');
     const emailInput = document.getElementById('email');
     const passwordInput = document.getElementById('password');
     const errorMessage = document.getElementById('error-message');
     const forgotPasswordLink = document.getElementById('forgot-password-link'); 
-
+    
     errorMessage.style.display = 'none'; 
+
+    const successMessage = localStorage.getItem('registrationSuccess');
+    if (successMessage) {
+        alert(successMessage);
+        
+        const registeredUser = JSON.parse(sessionStorage.getItem('registeredUser'));
+        if (registeredUser) {
+            authenticateUser({
+                email: registeredUser.email,
+                password: registeredUser.password
+            }, loginForm);
+            return; 
+        }
+    }
+
+    const prefillEmail = sessionStorage.getItem('prefillEmail');
+    if (prefillEmail) {
+        emailInput.value = prefillEmail;
+    }
+    
+    if (!successMessage) {
+        sessionStorage.removeItem('loginAttempt');
+        sessionStorage.removeItem('registeredUser');
+        sessionStorage.removeItem('prefillEmail');
+        sessionStorage.removeItem('prefillPassword');
+    }
 
     loginForm.addEventListener('submit', function(event) {
         event.preventDefault(); 

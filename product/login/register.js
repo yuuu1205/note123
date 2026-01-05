@@ -7,6 +7,17 @@ document.addEventListener('DOMContentLoaded', () => {
     const errorMessage = document.getElementById('error-message');
 
     errorMessage.style.display = 'none';
+
+    const prefillEmail = sessionStorage.getItem('prefillEmail');
+    const prefillPassword = sessionStorage.getItem('prefillPassword');
+    
+    if (prefillEmail) {
+        emailInput.value = prefillEmail;
+    }
+    if (prefillPassword) {
+        passwordInput.value = prefillPassword;
+    }
+
     function isValidEmail(email) {
         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
         return emailRegex.test(email);
@@ -31,6 +42,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
         if (!isValidEmail(email)) {
             errorMessage.textContent = '電子郵件格式不正確。';
+            errorMessage.style.display = 'block';
+            return;
+        }
+
+        if (password.length < 6) {
+            errorMessage.textContent = '密碼長度至少為 6 個字元。';
             errorMessage.style.display = 'block';
             return;
         }
@@ -65,7 +82,9 @@ function registerNewUser(data, formElement) {
     return simulateRegistrationBackend(data)
     .then(result => {
         if (result.success) {
-            alert('註冊成功！您現在可以登入了。');
+            sessionStorage.setItem('registeredUser', JSON.stringify(data));
+            localStorage.setItem('registrationSuccess', '註冊成功！系統將為您自動登入。'); 
+
             formElement.reset(); 
             setTimeout(() => {
                 window.location.href = '../login/login.html'; 
