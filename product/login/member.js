@@ -108,10 +108,14 @@ document.addEventListener('DOMContentLoaded', () => {
     function loadMemberInfo() {
         const userName = localStorage.getItem('userName');
         const userEmail = localStorage.getItem('userEmail');
-        
+        const defaultAddress = '桃園市中壢區中北路200號'; 
         document.getElementById('username').value = userName || '用戶';
         document.getElementById('email').value = userEmail || '未提供';
 
+        const addressInput = document.getElementById('address');
+        if (addressInput) {
+            addressInput.value = localStorage.getItem('userAddress') || defaultAddress;
+        }
     }
     loadMemberInfo();
 
@@ -141,7 +145,7 @@ document.addEventListener('DOMContentLoaded', () => {
             localStorage.removeItem('userToken');
             localStorage.removeItem('userName');
             localStorage.removeItem('userEmail');
-            
+            localStorage.removeItem('userAddress');
             alert('您已成功登出。');
             window.location.href = '../../index.html'; 
         }
@@ -151,10 +155,29 @@ document.addEventListener('DOMContentLoaded', () => {
         e.preventDefault();
         const newUsername = document.getElementById('username').value.trim();
         const phone = document.getElementById('phone').value.trim();
-        const currentUserName = localStorage.getItem('userName');
+        const newAddress = document.getElementById('address').value.trim(); 
 
-        if (newUsername !== currentUserName || phone !== '0912-345678') { 
+        const currentUserName = localStorage.getItem('userName');
+        const currentAddress = localStorage.getItem('userAddress') || '桃園市中壢區中北路200號';
+        
+        let isDataChanged = false;
+
+        if (newUsername !== currentUserName) {
             localStorage.setItem('userName', newUsername);
+            isDataChanged = true;
+        }
+        if (newAddress !== currentAddress) {
+            localStorage.setItem('userAddress', newAddress);
+            isDataChanged = true;
+        }
+        
+        if (phone !== '0912-345678') { 
+            if (!isDataChanged) { 
+                isDataChanged = true; 
+            }
+        }
+
+        if (isDataChanged) {
             infoStatusMessage.textContent = '會員資訊更新成功！';
         } else {
             infoStatusMessage.textContent = '您的資料已經是最新的。';
