@@ -180,17 +180,5 @@
 
         <script src="cart.js"></script>
         <script src="../login/header-status.js"></script>
-
-        <script>
-            document.getElementById("checkout-btn").addEventListener("click", function () {
-                const isLoggedIn = localStorage.getItem("isLoggedIn") === "true";
-                if (!isLoggedIn) {
-                    const currentUrl = window.location.pathname;
-                    window.location.href = "../login/login.html?returnUrl=" + encodeURIComponent(currentUrl);
-                    return;
-                }
-                alert("已登入，可進行結帳流程");
-            });
-            </script>
 </body> 
 </html>

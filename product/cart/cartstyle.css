@@ -173,36 +173,3 @@ button {
     text-align: center;
 }
 
-@media (max-width: 768px) {
-    .cart-table thead {
-        display: none;
-    }
-
-    .cart-table,
-    .cart-table tbody,
-    .cart-table tr {
-        display: block;
-        width: 100%;
-    }
-
-    .cart-table tr {
-        margin-bottom: 15px;
-        border: 1px solid #ddd;
-        border-radius: 8px;
-        padding: 10px;
-        background: #fff;
-    }
-
-    .cart-table td {
-        display: flex;
-        justify-content: space-between;
-        padding: 6px 0;
-        border: none;
-    }
-
-    .cart-table td::before {
-        content: attr(data-label);
-        font-weight: bold;
-        color: #555;
-    }
-}
