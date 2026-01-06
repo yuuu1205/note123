@@ -1,25 +1,36 @@
+const PERMANENT_USER_EMAIL = '111@gmail.com';
+const PERMANENT_USER_PASSWORD = '111111';
+
 function simulateBackendAuth(email, password, isFirstAttempt) {
     return new Promise(resolve => {
         setTimeout(() => {
-            const simulatedUser = {
-                name: '會員', 
-                email: email
-            };
-
+            const isPermanentUser = (email === PERMANENT_USER_EMAIL && password === PERMANENT_USER_PASSWORD);
             const registeredUser = JSON.parse(sessionStorage.getItem('registeredUser'));
             
-            if (isFirstAttempt && !registeredUser) {
+            const isRegistered = isPermanentUser || (registeredUser && registeredUser.email === email && registeredUser.password === password);
+
+            if (isRegistered) {
+                const user = isPermanentUser ? 
+                    { username: '會員', email: PERMANENT_USER_EMAIL } : 
+                    registeredUser;
+
+                resolve({ 
+                    success: true, 
+                    token: 'fake-test-token-' + Date.now(), 
+                    message: '登入成功',
+                    user: user 
+                });
+            } else if (isFirstAttempt) {
                 resolve({ 
                     success: false, 
                     message: '查無此帳號！請先前往註冊新帳號。',
                     errorCode: 'NOT_REGISTERED' 
                 });
             } else {
-                resolve({ 
-                    success: true, 
-                    token: 'fake-test-token-' + Date.now(), 
-                    message: '登入成功',
-                    user: registeredUser || simulatedUser 
+                 resolve({ 
+                    success: false, 
+                    message: '登入失敗，電子郵件或密碼錯誤。',
+                    errorCode: 'AUTH_FAILED' 
                 });
             }
         }, 500); 
@@ -46,6 +57,8 @@ function authenticateUser(data, formElement) {
             sessionStorage.removeItem('loginAttempt');
             sessionStorage.removeItem('registeredUser');
             localStorage.removeItem('registrationSuccess'); 
+            sessionStorage.removeItem('prefillEmail');
+            sessionStorage.removeItem('prefillPassword');
 
             setTimeout(() => {
                 window.location.href = 'member.html'; 
